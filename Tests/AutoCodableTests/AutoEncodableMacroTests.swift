@@ -38,7 +38,7 @@ final class AutoEncodableMacroTests: XCTestCase {
                     case baz
                 }
 
-                func encode(to encoder: Encoder) throws {
+                func encode(to encoder: any Encoder) throws {
                     var container = encoder.container(keyedBy: CodingKeys.self)
                     try container.encode(bar, forKey: .bar)
                     try container.encode(baz, forKey: .baz)
@@ -76,7 +76,7 @@ final class AutoEncodableMacroTests: XCTestCase {
                     case baz
                 }
 
-                func encode(to encoder: Encoder) throws {
+                func encode(to encoder: any Encoder) throws {
                     var container = encoder.container(keyedBy: CodingKeys.self)
                     try container.encode(bar, forKey: .bar)
                     try container.encode(baz, forKey: .baz)
@@ -114,7 +114,7 @@ final class AutoEncodableMacroTests: XCTestCase {
                     case baz
                 }
 
-                public func encode(to encoder: Encoder) throws {
+                public func encode(to encoder: any Encoder) throws {
                     var container = encoder.container(keyedBy: CodingKeys.self)
                     try container.encode(bar, forKey: .bar)
                     try container.encode(baz, forKey: .baz)
@@ -144,7 +144,7 @@ final class AutoEncodableMacroTests: XCTestCase {
             }
             extension Foo: Encodable {
 
-                func encode(to encoder: Encoder) throws {
+                func encode(to encoder: any Encoder) throws {
                     var container = encoder.singleValueContainer()
                     try container.encode(bar)
                 }
@@ -171,7 +171,7 @@ final class AutoEncodableMacroTests: XCTestCase {
             }
             extension Foo: Encodable {
 
-                public func encode(to encoder: Encoder) throws {
+                public func encode(to encoder: any Encoder) throws {
                     var container = encoder.singleValueContainer()
                     try container.encode(bar)
                 }
@@ -210,7 +210,7 @@ final class AutoEncodableMacroTests: XCTestCase {
                     case baz
                 }
 
-                func encode(to encoder: Encoder) throws {
+                func encode(to encoder: any Encoder) throws {
                     var container = encoder.singleValueContainer()
                     switch self {
                     case .bar:
@@ -275,7 +275,7 @@ final class AutoEncodableMacroTests: XCTestCase {
                     }
                 }
 
-                func encode(to encoder: Encoder) throws {
+                func encode(to encoder: any Encoder) throws {
                     var container = encoder.container(keyedBy: CodingKeys.self)
                     try container.encode(bar, forKey: .bar)
                     try container.encode(Baz(from: baz), forKey: .baz)
@@ -323,7 +323,7 @@ final class AutoEncodableMacroTests: XCTestCase {
                     }
                 }
 
-                func encode(to encoder: Encoder) throws {
+                func encode(to encoder: any Encoder) throws {
                     var container = encoder.container(keyedBy: CodingKeys.self)
                     var quxContainer = container.nestedContainer(
                         keyedBy: CodingKeys.QuxCodingKeys.self,
@@ -396,7 +396,7 @@ final class AutoEncodableMacroTests: XCTestCase {
                     }
                 }
 
-                func encode(to encoder: Encoder) throws {
+                func encode(to encoder: any Encoder) throws {
                     var container = encoder.container(keyedBy: CodingKeys.self)
                     var quxContainer = container.nestedContainer(
                         keyedBy: CodingKeys.QuxCodingKeys.self,

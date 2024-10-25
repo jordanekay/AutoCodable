@@ -38,7 +38,7 @@ final class AutoDecodableMacroTests: XCTestCase {
                     case baz
                 }
 
-                init(from decoder: Decoder) throws {
+                init(from decoder: any Decoder) throws {
                     let container = try decoder.container(keyedBy: CodingKeys.self)
                     try self.init(
                         bar: container.decode(for: .bar),
@@ -78,7 +78,7 @@ final class AutoDecodableMacroTests: XCTestCase {
                     case baz
                 }
 
-                init(from decoder: Decoder) throws {
+                init(from decoder: any Decoder) throws {
                     let container = try decoder.container(keyedBy: CodingKeys.self)
                     try self.init(
                         bar: container.decode(for: .bar),
@@ -118,7 +118,7 @@ final class AutoDecodableMacroTests: XCTestCase {
                     case baz
                 }
 
-                public init(from decoder: Decoder) throws {
+                public init(from decoder: any Decoder) throws {
                     let container = try decoder.container(keyedBy: CodingKeys.self)
                     try self.init(
                         bar: container.decode(for: .bar),
@@ -150,7 +150,7 @@ final class AutoDecodableMacroTests: XCTestCase {
             }
             extension Foo: Decodable {
 
-                init(from decoder: Decoder) throws {
+                init(from decoder: any Decoder) throws {
                     let container = try decoder.singleValueContainer()
                     try self.init(bar: container.decode())
                 }
@@ -177,7 +177,7 @@ final class AutoDecodableMacroTests: XCTestCase {
             }
             extension Foo: Decodable {
 
-                public init(from decoder: Decoder) throws {
+                public init(from decoder: any Decoder) throws {
                     let container = try decoder.singleValueContainer()
                     try self.init(bar: container.decode())
                 }
@@ -216,7 +216,7 @@ final class AutoDecodableMacroTests: XCTestCase {
                     case baz
                 }
 
-                init(from decoder: Decoder) throws {
+                init(from decoder: any Decoder) throws {
                     let container = try decoder.singleValueContainer()
                     let stringValue = try container.decode(String.self)
                     switch stringValue {
@@ -285,7 +285,7 @@ final class AutoDecodableMacroTests: XCTestCase {
                     }
                 }
 
-                init(from decoder: Decoder) throws {
+                init(from decoder: any Decoder) throws {
                     let container = try decoder.container(keyedBy: CodingKeys.self)
                     try self.init(
                         bar: container.decode(for: .bar),
@@ -335,7 +335,7 @@ final class AutoDecodableMacroTests: XCTestCase {
                     }
                 }
 
-                init(from decoder: Decoder) throws {
+                init(from decoder: any Decoder) throws {
                     let container = try decoder.container(keyedBy: CodingKeys.self)
                     let quxContainer = try container.nestedContainer(
                         keyedBy: CodingKeys.QuxCodingKeys.self,
@@ -408,7 +408,7 @@ final class AutoDecodableMacroTests: XCTestCase {
                     }
                 }
 
-                init(from decoder: Decoder) throws {
+                init(from decoder: any Decoder) throws {
                     let container = try decoder.container(keyedBy: CodingKeys.self)
                     let quxContainer = try container.nestedContainer(
                         keyedBy: CodingKeys.QuxCodingKeys.self,

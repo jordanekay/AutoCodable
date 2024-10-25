@@ -55,7 +55,7 @@ public struct AutoEncodableMacro: MemberMacro {
                 parameterClause: FunctionParameterClauseSyntax(
                     parameters: FunctionParameterListSyntax(
                         arrayLiteral: FunctionParameterSyntax(
-                            stringLiteral: "to encoder: Encoder"
+                            stringLiteral: "to encoder: any Encoder"
                         )
                     )
                 ),

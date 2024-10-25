@@ -54,7 +54,7 @@ public struct AutoDecodableMacro: MemberMacro {
                 parameterClause: FunctionParameterClauseSyntax(
                     parameters: FunctionParameterListSyntax(
                         arrayLiteral: FunctionParameterSyntax(
-                            stringLiteral: "from decoder: Decoder"
+                            stringLiteral: "from decoder: any Decoder"
                         )
                     )
                 ),

@@ -4,7 +4,7 @@
 
 ## Motivation
 
-The Swift's built-in `Codable` API has a major advantage - it automatically synthesizes many different encoding and decoding implementations when using it. This behavior allows to easy create custom types and makes them conform to `Encodable` or `Decodable` without a need to implement `func encode(to encoder: Encoder) throws` or `init(from decoder: Decoder) throws` explicitly.
+The Swift's built-in `Codable` API has a major advantage - it automatically synthesizes many different encoding and decoding implementations when using it. This behavior allows to easy create custom types and makes them conform to `Encodable` or `Decodable` without a need to implement `func encode(to encoder: any Encoder) throws` or `init(from decoder: any Decoder) throws` explicitly.
 
 However, one of its limitations is the necessity to keep everything within the same file. It means that the following scenario may happen:
 
@@ -62,7 +62,7 @@ extension User: Encodable {
         case lastName
     }
 
-    func encode(to encoder: Encoder) throws {
+    func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(firstName, forKey: .firstName)
         try container.encode(lastName, forKey: .lastName)
@@ -99,7 +99,7 @@ extension User: Encodable {
         case lastName
     }
 
-    public func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(firstName, forKey: .firstName)
         try container.encode(lastName, forKey: .lastName)
@@ -126,7 +126,7 @@ extension Identifier: Encodable {}
 
 // Identifier+Encodable.swift
 extension Identifier: Encodable {
-    func encode(to encoder: Encoder) throws {
+    func encode(to encoder: any Encoder) throws {
         var container = encoder.singleValueContainer()
         try container.encode(value)
     }
@@ -171,7 +171,7 @@ extension User: Encodable {
         }
     }
 
-    func encode(to encoder: Encoder) throws {
+    func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         var namesContainer = container.nestedContainer(
             keyedBy: CodingKeys.NamesCodingKeys.self,
@@ -212,7 +212,7 @@ extension Membership: Encodable {
         case premium
     }
 
-    func encode(to encoder: Encoder) throws {
+    func encode(to encoder: any Encoder) throws {
         var container = encoder.singleValueContainer()
         switch self {
         case .regular:
@@ -278,7 +278,7 @@ extension User: Encodable {
         }
     }
 
-    func encode(to encoder: Encoder) throws {
+    func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(firstName, forKey: .firstName)
         try container.encode(lastName, forKey: .lastName)
@@ -318,7 +318,7 @@ extension User: Decodable {
         case lastName
     }
 
-    init(from decoder: Decoder) throws {
+    init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         try self.init(
             firstName: container.decode(for: .firstName),
@@ -357,7 +357,7 @@ extension User: Decodable {
         case lastName
     }
 
-    public init(from decoder: Decoder) throws {
+    public init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         try self.init(
             firstName: container.decode(for: .firstName),
@@ -386,7 +386,7 @@ extension Identifier: Encodable {}
 
 // Identifier+Decodable.swift
 extension Identifier: Decodable {
-    init(from decoder: Decoder) throws {
+    init(from decoder: any Decoder) throws {
         let container = try decoder.singleValueContainer()
         try self.init(value: container.decode())
     }
@@ -431,7 +431,7 @@ extension User: Decodable {
         }
     }
 
-    init(from decoder: Decoder) throws {
+    init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let namesContainer = try container.nestedContainer(
             keyedBy: CodingKeys.NamesCodingKeys.self,
@@ -474,7 +474,7 @@ extension Membership: Decodable {
         case premium
     }
 
-    init(from decoder: Decoder) throws {
+    init(from decoder: any Decoder) throws {
         let container = try decoder.singleValueContainer()
         let stringValue = try container.decode(String.self)
         switch stringValue {
@@ -544,7 +544,7 @@ extension User: Decodable {
         }
     }
 
-    init(from decoder: Decoder) throws {
+    init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         try self.init(
             firstName: container.decode(for: .firstName),
