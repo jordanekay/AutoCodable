@@ -96,7 +96,7 @@ public struct AutoEncodableMacro: MemberMacro {
                 if let encodedValue = caseMember.decl.argValue(forAttributeName: "EncodedValue") {
                     keyedContainerEncodingArgumentSyntax(
                         label: caseMember.name,
-                        encodeType: encodedValue.base?.as(DeclReferenceExprSyntax.self)?.baseName.text,
+                        encodeType: encodedValue.description,
                         conditional: conditional
                     )
                 } else if let nestedEnumDecl = nestedEnumsDecl.first(where: { $0.name == caseMember.name })?.decl {
@@ -106,7 +106,7 @@ public struct AutoEncodableMacro: MemberMacro {
                             keyedContainerEncodingArgumentSyntax(
                                 label: nestedCaseMember.name,
                                 containerName: "\(caseMember.name)Container",
-                                encodeType: encodedValue.base?.as(DeclReferenceExprSyntax.self)?.baseName.text,
+                                encodeType: encodedValue.description,
                                 conditional: conditional
                             )
                         } else {
